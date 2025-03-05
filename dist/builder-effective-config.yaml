@@ -1,0 +1,16 @@
+directories:
+  output: dist
+  buildResources: resources
+appId: com.seuapp.downloader
+files:
+  - filter:
+      - '**/*'
+extraResources:
+  - from: resources/yt-dlp/
+    to: yt-dlp/
+    filter:
+      - '**/*'
+win:
+  target: nsis
+icon: resources/icon.png.ico
+electronVersion: 27.3.11

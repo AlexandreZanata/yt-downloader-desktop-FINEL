@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloader de Vídeos</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 38px;
+        background-color: #d6d6d3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 70vh; /* Centraliza verticalmente */
+        box-sizing: border-box;
+    }
+
+    h1 {
+        color: #000000;
+        margin-bottom: 15px;
+    }
+
+    .input-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 50px;
+    }
+
+    input[type="text"], select {
+        padding: 12px;
+        border: 2px solid rgba(0, 0, 0, 0.8);
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: #eeeeee;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .input1 {
+        width: 500px;
+        margin-bottom: 10px;
+    }
+
+    .input2 {
+        width: 527px;
+    }
+
+    button { 
+        padding: 10px 10px;
+        width: 100px;
+        margin: 10px;
+        background-color: #00c853;
+        border: 2px solid black;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #limpar {
+        background-color: #d50000;
+        margin-top: -5px;
+    }
+
+    button:hover {
+        background-color: #009624;
+    }
+
+    #limpar:hover {
+        background-color: #9b0000;
+    }
+
+    #progress-container {
+        width: 100%;
+        max-width: 500px;
+        margin-top: -23px;
+
+    }
+
+    progress {
+        width: 500px;
+        height: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    #status {
+        margin-top: 0px;
+        font-size: 18px;
+        color: #0003c2;
+    }
+
+    progress::-webkit-progress-bar {
+        background-color: #f5f1f1;
+    }
+
+/* Cor do valor preenchido da barra de progresso */
+    progress::-webkit-progress-value {
+        background-color: #006eff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Baixar Vídeo do YouTube</h1>
+  <input class="input1" type="text" id="url" placeholder="Cole o link do vídeo">
+  <select class="input2" id="format">
+    <option value="default">▶️Vídeo Padrão</option>
+    <option value="best">▶️Melhor Qualidade▶️</option>
+    <option value="audio">🎵Somente Áudio🎵</option>
+  </select>
+  <button onclick="baixarVideo()">Baixar</button>
+  <button id="limpar" onclick="limparTexto()">Limpar</button>
+  <p id="status"></p>
+  <div id="progress-container" style="display:none;">
+    <p id="progress-text">Aguarde, baixando seu vídeo...</p>
+    <progress id="progress-bar" value="0" max="100"></progress>
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    // Reinicia o estado da barra de progresso e a mensagem
+    function resetProgress() {
+      const progressBar = document.getElementById('progress-bar');
+      progressBar.value = 0;
+      document.getElementById('progress-text').innerText = 'Aguarde, baixando seu vídeo...';
+      document.getElementById('progress-container').style.display = 'block';
+    }
+
+    function baixarVideo() {
+      // Reinicia a barra de progresso e limpa status
+      document.getElementById('status').innerText = '';
+      resetProgress();
+
+      const url = document.getElementById('url').value;
+      const format = document.getElementById('format').value;
+      ipcRenderer.send('download-video', url, format);
+    }
+
+    function limparTexto() {
+      document.getElementById('url').value = '';
+      document.getElementById('progress-container').style.display = 'none';
+      document.getElementById('status').innerText = '';
+    }
+
+    // Anima a barra de progresso gradualmente até o valor recebido
+    ipcRenderer.on('download-progress', (event, newProgress) => {
+      const progressBar = document.getElementById('progress-bar');
+      let currentProgress = parseFloat(progressBar.value) || 0;
+      const diff = newProgress - currentProgress;
+      const steps = 20; // número de passos para a animação
+      const stepSize = diff / steps;
+      let stepCount = 0;
+      
+      const interval = setInterval(() => {
+        stepCount++;
+        currentProgress += stepSize;
+        progressBar.value = currentProgress;
+        if (stepCount >= steps) {
+          clearInterval(interval);
+          progressBar.value = newProgress;
+        }
+      }, 50); // 50 ms por passo (aprox. 1 segundo para transição completa)
+    });
+
+    ipcRenderer.on('download-status', (event, message) => {
+      document.getElementById('status').innerText = message;
+    });
+  </script>
+</body>
+</html>
