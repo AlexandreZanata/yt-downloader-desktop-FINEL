@@ -64,13 +64,18 @@ ipcMain.on('download-video', (event, url, format) => {
     let downloadPath = result.filePath;
     let args = [url, '-o', downloadPath, '--no-check-certificate'];
 
+    // Para o formato de áudio
     if (format === 'audio') {
       args.push('-x', '--audio-format', 'mp3');
       downloadPath = downloadPath.replace(/\.[^.]+$/, ".mp3");
-    } else if (format === 'best') {
-      args.push('-f', 'bestvideo+bestaudio');
-    } else if (format === 'default') {
-      args.push('-f', 'bestvideo[height<=480]+bestaudio/best[height<=480]');
+    }
+    // Para o melhor vídeo + áudio
+    else if (format === 'best') {
+      args.push('-f', 'bestvideo');
+    }
+    // Para o vídeo padrão de 480p
+    else if (format === 'default') {
+      args.push('-f', 'bestvideo[height<=480]');
     }
     
     args.push('--newline');
