@@ -71,11 +71,11 @@ ipcMain.on('download-video', (event, url, format) => {
     }
     // Para o melhor vídeo + áudio
     else if (format === 'best') {
-      args.push('-f', 'bestvideo');
+      args.push('-f', 'bestvideo+bestaudio');
     }
     // Para o vídeo padrão de 480p
     else if (format === 'default') {
-      args.push('-f', 'bestvideo[height<=480]');
+      args.push('-f', 'bestvideo[height<=480]+bestaudio/best[height<=480]');
     }
     
     args.push('--newline');
