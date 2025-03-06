@@ -14,7 +14,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 70vh; /* Centraliza verticalmente */
+        height: 70vh;
         box-sizing: border-box;
     }
 
@@ -81,7 +81,6 @@
         width: 100%;
         max-width: 500px;
         margin-top: -23px;
-
     }
 
     progress {
@@ -101,7 +100,6 @@
         background-color: #f5f1f1;
     }
 
-/* Cor do valor preenchido da barra de progresso */
     progress::-webkit-progress-value {
         background-color: #006eff;
     }
@@ -126,7 +124,6 @@
   <script>
     const { ipcRenderer } = require('electron');
 
-    // Reinicia o estado da barra de progresso e a mensagem
     function resetProgress() {
       const progressBar = document.getElementById('progress-bar');
       progressBar.value = 0;
@@ -135,11 +132,15 @@
     }
 
     function baixarVideo() {
-      // Reinicia a barra de progresso e limpa status
       document.getElementById('status').innerText = '';
       resetProgress();
 
       const url = document.getElementById('url').value;
+      if (!url || !/^https?:\/\/.*$/.test(url)) {
+        document.getElementById('status').innerText = 'Por favor, insira uma URL válida!';
+        return;
+      }
+
       const format = document.getElementById('format').value;
       ipcRenderer.send('download-video', url, format);
     }
@@ -150,12 +151,11 @@
       document.getElementById('status').innerText = '';
     }
 
-    // Anima a barra de progresso gradualmente até o valor recebido
     ipcRenderer.on('download-progress', (event, newProgress) => {
       const progressBar = document.getElementById('progress-bar');
       let currentProgress = parseFloat(progressBar.value) || 0;
       const diff = newProgress - currentProgress;
-      const steps = 20; // número de passos para a animação
+      const steps = 20;
       const stepSize = diff / steps;
       let stepCount = 0;
       
@@ -167,7 +167,7 @@
           clearInterval(interval);
           progressBar.value = newProgress;
         }
-      }, 50); // 50 ms por passo (aprox. 1 segundo para transição completa)
+      }, 50);
     });
 
     ipcRenderer.on('download-status', (event, message) => {
