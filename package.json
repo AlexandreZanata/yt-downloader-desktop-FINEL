@@ -2,7 +2,7 @@
   "name": "zanata-baixador",
   "version": "1.0.0",
   "description": "Aplicativo para baixar vídeos do YouTube",
-  "author": "Seu Nome <seuemail@example.com>",
+  "author": "Seu Nome <zanataxandyzv07@gmail.com>",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -14,6 +14,8 @@
   },
   "build": {
     "appId": "com.seuapp.downloader",
+    "productName": "zanatasoftwareDEFAULT",
+    "asar": false,
     "files": [
       "**/*"
     ],
