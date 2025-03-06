@@ -45,7 +45,7 @@ ipcMain.on('download-video', (event, url, format) => {
     defaultPath = path.join(app.getPath('downloads'), '%(title)s.mp3');
   } else {
     filters = [
-      { name: 'Vídeo', extensions: ['mp4', 'mkv', 'webm'] },
+      { name: 'Vídeo', extensions: ['mp4'] },
       { name: 'Todos os Arquivos', extensions: ['*'] }
     ];
     defaultPath = path.join(app.getPath('downloads'), '%(title)s.%(ext)s');
@@ -68,13 +68,11 @@ ipcMain.on('download-video', (event, url, format) => {
       args.push('-x', '--audio-format', 'mp3');
       downloadPath = downloadPath.replace(/\.[^.]+$/, ".mp3");
     } else if (format === 'best') {
-      args.push('-f', 'bestvideo+bestaudio');
-      // Alterado para mkv para garantir compatibilidade com áudio Opus
-      args.push('--merge-output-format', 'mkv');
+      args.push('-f', 'bestvideo+bestaudio/best');  // Baixar vídeo e áudio juntos
     } else if (format === 'default') {
-      args.push('-f', 'bestvideo[height<=480]+bestaudio/best[height<=480]');
+      args.push('-f', 'bestvideo[height<=480]+bestaudio/best[height<=480]'); // Baixar vídeo e áudio juntos em 480p
     }
-    
+
     args.push('--newline');
 
     const child = spawn(ytDlpPath, args);
