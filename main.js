@@ -65,7 +65,7 @@ ipcMain.on('download-video', (event, url, format) => {
     let args = [url, '-o', downloadPath, '--no-check-certificate'];
 
     // Para o formato de áudio
-    if (format === 'audio') {
+      if (format === 'audio') {
       args.push('-x', '--audio-format', 'mp3');
       downloadPath = downloadPath.replace(/\.[^.]+$/, ".mp3");
     }
