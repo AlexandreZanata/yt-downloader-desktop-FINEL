@@ -1,3 +1,4 @@
+```markdown
 # YouTube Downloader
 
 This is a YouTube video downloader application built with **Electron** and **yt-dlp**. The application allows users to download videos and audio from YouTube and other video-sharing platforms. It provides options to download in different formats, such as standard video quality, best quality, or audio only.
@@ -31,6 +32,14 @@ FFmpeg is required to properly merge high-quality video and audio files. Without
   1. Download FFmpeg from the official website: [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
   2. Extract the downloaded file.
   3. Add the `bin` folder to the system PATH environment variable.
+  
+- **Windows (via Chocolatey)**:
+  1. Open Command Prompt as Administrator.
+  2. Run the following command:
+     ```bash
+     choco install ffmpeg
+     ```
+  3. Restart your system or update the PATH environment variable if necessary.
 
 - **MacOS**:
   ```bash
@@ -116,4 +125,4 @@ If you'd like to contribute to this project, feel free to fork the repository, m
 ---
 
 Enjoy downloading your favorite videos and audio from YouTube, Instagram, Facebook, and Twitter (X)!
-
+```
