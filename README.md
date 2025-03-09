@@ -10,6 +10,7 @@ This is a YouTube video downloader application built with **Electron** and **yt-
 - Simple and intuitive user interface built using **Electron**.
 - Progress bar to show download status in real-time.
 - Customizable download location for each file.
+- Supports downloading videos from **YouTube, Instagram, Facebook, and Twitter (X)**.
 
 ## Requirements
 
@@ -18,6 +19,28 @@ Before using this application, ensure you have the following installed:
 - **Node.js** (version 16 or later)
 - **yt-dlp** (downloaded and bundled with the application)
 - **Electron** (Electron will be installed automatically with dependencies)
+- **FFmpeg** (optional but recommended for best quality downloads)
+
+### Installing FFmpeg
+
+FFmpeg is required to properly merge high-quality video and audio files. Without FFmpeg, high-quality videos may be downloaded as separate video and audio files instead of a single merged file.
+
+#### How to Install FFmpeg:
+
+- **Windows**:
+  1. Download FFmpeg from the official website: [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
+  2. Extract the downloaded file.
+  3. Add the `bin` folder to the system PATH environment variable.
+
+- **MacOS**:
+  ```bash
+  brew install ffmpeg
+  ```
+
+- **Linux**:
+  ```bash
+  sudo apt update && sudo apt install ffmpeg
+  ```
 
 ## Installation
 
@@ -51,8 +74,8 @@ This will launch the application, and you will be able to download YouTube video
 1. **Open the Application**:
    - After starting the application, a window will open with a field to input the YouTube video URL.
 
-2. **Enter the YouTube URL**:
-   - Paste the YouTube video URL in the text field.
+2. **Enter the Video URL**:
+   - Paste the YouTube, Instagram, Facebook, or Twitter (X) video URL in the text field.
 
 3. **Choose the format**:
    - You will have three options to choose from:
@@ -83,6 +106,7 @@ This will launch the application, and you will be able to download YouTube video
 ## Known Issues
 
 - Ensure you have **yt-dlp.exe** in the **resources/yt-dlp** folder, as the app relies on this for video downloads.
+- Without **FFmpeg**, high-quality downloads will result in separate video and audio files instead of a single merged file.
 - Download speed may vary based on the internet connection speed and video size.
 
 ## Contributing
@@ -95,4 +119,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Enjoy downloading your favorite videos and audio from YouTube!
+Enjoy downloading your favorite videos and audio from YouTube, Instagram, Facebook, and Twitter (X)!
+
