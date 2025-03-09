@@ -65,7 +65,7 @@ ipcMain.on('download-video', (event, url, format) => {
     let args = [url, '-o', downloadPath, '--no-check-certificate'];
 
     if (format === 'audio') {
-      args.push('-x', '--audio-format', 'mp3');
+      args.push('-f', 'bestaudio');
       downloadPath = downloadPath.replace(/\.[^.]+$/, ".mp3");
     } else if (format === 'best') {
       args.push('-f', 'bestvideo+bestaudio/best');  // Baixar vídeo e áudio juntos
