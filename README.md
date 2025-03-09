@@ -31,14 +31,18 @@ FFmpeg is required to properly merge high-quality video and audio files. Without
   1. Download FFmpeg from the official website: [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
   2. Extract the downloaded file.
   3. Add the `bin` folder to the system PATH environment variable.
-  
+
 - **Windows (via Chocolatey)**:
-  1. Open Command Prompt as Administrator.
-  2. Run the following command:
+  1. Install Chocolatey (if not already installed). Open PowerShell as Administrator and run:
+     ```powershell
+     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+     ```
+  2. Close and reopen your terminal.
+  3. Run the following command to install FFmpeg:
      ```bash
      choco install ffmpeg
      ```
-  3. Restart your system or update the PATH environment variable if necessary.
+  4. Restart your system or update the PATH environment variable if necessary.
 
 - **MacOS**:
   ```bash
@@ -124,3 +128,4 @@ If you'd like to contribute to this project, feel free to fork the repository, m
 ---
 
 Enjoy downloading your favorite videos and audio from YouTube, Instagram, Facebook, and Twitter (X)!
+
