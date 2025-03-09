@@ -113,10 +113,6 @@ This will launch the application, and you will be able to download YouTube video
 
 If you'd like to contribute to this project, feel free to fork the repository, make changes, and create a pull request. Any contributions are welcome!
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 Enjoy downloading your favorite videos and audio from YouTube, Instagram, Facebook, and Twitter (X)!
