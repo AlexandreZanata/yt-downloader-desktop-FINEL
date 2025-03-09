@@ -1,4 +1,3 @@
-```markdown
 # YouTube Downloader
 
 This is a YouTube video downloader application built with **Electron** and **yt-dlp**. The application allows users to download videos and audio from YouTube and other video-sharing platforms. It provides options to download in different formats, such as standard video quality, best quality, or audio only.
@@ -125,4 +124,3 @@ If you'd like to contribute to this project, feel free to fork the repository, m
 ---
 
 Enjoy downloading your favorite videos and audio from YouTube, Instagram, Facebook, and Twitter (X)!
-```
