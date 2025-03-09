@@ -70,7 +70,7 @@ ipcMain.on('download-video', (event, url, format) => {
     } else if (format === 'best') {
       args.push('-f', 'bestvideo+bestaudio/best');  // Baixar vídeo e áudio juntos
     } else if (format === 'default') {
-      args.push('-f', 'bestvideo[height<=480]+bestaudio/best[height<=480]'); // Baixar vídeo e áudio juntos em 480p
+      args.push('-f', 'best'); // Baixar vídeo e áudio juntos em 480p
     }
 
     args.push('--newline');
